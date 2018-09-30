@@ -1,0 +1,3 @@
+This is a text file.
+Whose lines should be reversed.
+Byte by byte.
