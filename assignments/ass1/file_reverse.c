@@ -1,14 +1,14 @@
 /****************************************************
-* Michael Kucharski
-* Assignment 1 - reverse a file using open, close, lseek
-* Date Jun 1, 2014
+* Author: Michael Kucharski
+* Assignment 1: reverse a file using read(), write(), lseek()
+* Date: Jun 1, 2014
 *****************************************************/
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-int main (int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 	int rr;
 	int infile, outfile, filesize, seek_success;
 	char buffer[1];
