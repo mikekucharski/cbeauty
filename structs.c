@@ -65,7 +65,7 @@ int main() {
   // 3. We know the type is really a struct Point, so cast the void* -> struct Point*.
   // 4. Pointer can be used just like pointer to stack object.
   // 5. Don't forget to free the heap memory!
-  size_t sizeOfPoint = sizeof(Point);
+  size_t sizeOfPoint = sizeof(struct Point);
   void* genericPointer = malloc(sizeOfPoint);
   struct Point* p5 = (struct Point*) genericPointer;
   p5->x = 5;
@@ -74,7 +74,7 @@ int main() {
   free(p5);
 
   // Do the same as above but inline and using the type alias. Looks more like Java now!
-  MikePointer p6 = (MikePointer) malloc(sizeof(Point));
+  MikePointer p6 = (MikePointer) malloc(sizeof(struct Point));
   p6->x = 7;
   p6->y = 8;
   printf("x6:%d y6:%d\n", p6->x, p6->y);
@@ -84,7 +84,7 @@ int main() {
   // There really are no arrays, just memory and pointers. The array syntax just says "increment the point N spaces, and dereference". 
   // ie. the following code just creates space for 3 Points and returns an address to the first one.
   // You can remove the "3 *" multiplier and this code will still work. The arrP[0] works even if there is one Point.
-  MikePointer arrP = (MikePointer) malloc(3 * sizeof(Point));
+  MikePointer arrP = (MikePointer) malloc(3 * sizeof(struct Point));
   arrP->x = 7;
   arrP->y = 8;
   printf("arrP.x:%d arrP.y:%d\n", arrP[0].x, arrP[0].y);
