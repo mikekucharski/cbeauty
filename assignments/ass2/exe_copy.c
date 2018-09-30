@@ -1,8 +1,8 @@
 /****************************************************
- * Author: Mike Kucharski
- * Assignment 2: copy an exe using read(), write()
- * Date: June 6, 2014
- ****************************************************/
+* Author: Mike Kucharski
+* Assignment 2: copy an exe using read(), write()
+* Date: June 6, 2014
+****************************************************/
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>

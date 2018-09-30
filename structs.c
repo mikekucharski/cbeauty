@@ -34,6 +34,13 @@ int main() {
   struct Point p2 = {1, 2};
   printf("x2:%d y2:%d\n", p2.x, p2.y);
 
+  // Assignment will actually copy the data. Changing the source does not affect the copy.
+  struct Point p3 = p2;
+  p2.x = 100;
+  p2.y = 100;
+  printf("Copy: x2:%d y2:%d\n", p3.x, p3.y);
+  printf("Addresses are different: p2:%p p3:%p\n", &p2, &p3);
+
   // Creates an initializes 2 Point objects on the stack. 
   // Note, the stack variable arr is actually a *pointer* to the first element of the array. You can access first element data using pointer syntax.
   struct Point arr[2];
