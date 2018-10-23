@@ -14,12 +14,12 @@ int main(int argc, char *argv[]) {
 
   if (argc != 3) {
     fprintf(stderr, "USAGE: %s inputFile outputFile.\n", argv[0]);
-    exit(-1);
+    exit(EXIT_FAILURE);
   }
 
   // Open the first file in read only mode.
   if ((infile = open(argv[1], O_RDONLY)) == -1) {
-    return -1;
+    exit(EXIT_FAILURE);
   }
 
   // Open the second file in write only mode.
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   // If it does exist truncate it to size 0.
   if ((outfile = open(argv[2], O_WRONLY|O_CREAT|O_TRUNC, 0755)) == -1) {
     close(infile);
-    return -2;
+    exit(EXIT_FAILURE);
   }
 
   /* 
@@ -54,12 +54,12 @@ int main(int argc, char *argv[]) {
     rr = write(outfile, buffer, bytes_read);
     if (rr != bytes_read) {
       fprintf(stderr, "Couldn't write %d byte [%d]\n", bytes_read, rr);
-      exit(-1);
+      exit(EXIT_FAILURE);
     }
   }
 
   close(infile);
   close(outfile);	
-  return 0;
+  exit(EXIT_SUCCESS);
 }
 
