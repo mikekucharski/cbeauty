@@ -1,9 +1,9 @@
 /****************************************************
-* Author: Mike Kucharski
-* Assignment 3: Count the number of processes your user is running. 
-* Simulate "ps -ef | grep 'mkucharski' | wc -l" using pipe(), fork(), dup()
-* https://www.geeksforgeeks.org/pipe-system-call/
-*****************************************************/
+ * Author: Mike Kucharski
+ * Assignment 3: Count the number of processes your user is running.
+ * Simulate "ps -ef | grep 'mkucharski' | wc -l" using pipe(), fork(), dup()
+ * https://www.geeksforgeeks.org/pipe-system-call/
+ *****************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -11,8 +11,9 @@
 int main() {
   int fd[2], fd2[2];
   int pid, pid2;
-  
-  // Create the first pipe and fork the process. This process will share the pipe files. 
+
+  // Create the first pipe and fork the process. This process will share the
+  // pipe files.
   if (pipe(fd) == -1) {
     perror("Failed to create first pipe");
     exit(EXIT_FAILURE);
@@ -47,9 +48,9 @@ int main() {
       // make STDIN point to 2nd pipe read.
       dup2(fd2[0], 0);
       close(fd2[0]);
-      
+
       // Replace contents of file with "wc -l".
-      execlp("wc", "wc", "-l", (char *) 0);
+      execlp("wc", "wc", "-l", (char *)0);
       perror("Failed to replace process with wc.");
       exit(EXIT_FAILURE);
 
@@ -69,7 +70,7 @@ int main() {
       close(fd2[1]);
 
       // Replace contents of process with "grep 'mkuchar'".
-      execlp("grep", "grep", "mkuchar", (char *) 0);
+      execlp("grep", "grep", "mkuchar", (char *)0);
       perror("Failed to replace process with grep.");
       exit(EXIT_FAILURE);
     }
@@ -81,16 +82,16 @@ int main() {
     // (Notice, the 2nd pipe was never opened for this process.)
     close(fd[0]);
 
-    // Set STDOUT to the write end of the 1st pipe. 
+    // Set STDOUT to the write end of the 1st pipe.
     // We want to send the output of this process into the first pipe.
     dup2(fd[1], 1);
     close(fd[1]);
 
     // Replace contents of process with "ps -ef".
-    execlp("ps", "ps", "-ef", (char *) 0);
+    execlp("ps", "ps", "-ef", (char *)0);
     perror("Failed to replace process with ps.");
     exit(EXIT_FAILURE);
   }
-  
+
   exit(EXIT_SUCCESS);
 }

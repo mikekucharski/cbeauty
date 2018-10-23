@@ -1,8 +1,8 @@
 /****************************************************
-* Author: Michael Kucharski
-* Assignment 1: reverse a file using read(), write(), lseek()
-* Date: Jun 1, 2014
-*****************************************************/
+ * Author: Michael Kucharski
+ * Assignment 1: reverse a file using read(), write(), lseek()
+ * Date: Jun 1, 2014
+ *****************************************************/
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,25 +26,25 @@ int main(int argc, char *argv[]) {
   // Open the second file in write only mode.
   // Create it if it doesn't exist.
   // If it does exist truncate it to size 0.
-  if ((outfile = open(argv[2], O_WRONLY|O_CREAT|O_TRUNC, 0644)) == -1) {
+  if ((outfile = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1) {
     close(infile);
     exit(EXIT_FAILURE);
   }
-  
-  filesize = lseek(infile, (off_t) 0, SEEK_END);
 
-  for (int i = filesize-1; i >= 0; i--) {
-    /* 
-     * use lseek() to move the file pointer to the ith position of the input file.
-     * To set the file pointer to a position use the SEEK_SET flag
-     * in lseek().
+  filesize = lseek(infile, (off_t)0, SEEK_END);
+
+  for (int i = filesize - 1; i >= 0; i--) {
+    /*
+     * use lseek() to move the file pointer to the ith position of the input
+     * file. To set the file pointer to a position use the SEEK_SET flag in
+     * lseek().
      */
     seek_success = lseek(infile, i, SEEK_SET);
-    if (seek_success < 0) { 
+    if (seek_success < 0) {
       exit(EXIT_FAILURE);
     }
 
-    rr = read(infile, buffer, 1);	/* read one byte */
+    rr = read(infile, buffer, 1); /* read one byte */
     if (rr != 1) {
       fprintf(stderr, "Couldn't read 1 byte [%d]\n", rr);
       exit(EXIT_FAILURE);

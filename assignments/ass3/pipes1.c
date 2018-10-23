@@ -1,9 +1,9 @@
 /*
-* Intro to pipes - Pipes are a form of interprocess communication (IPC). They 
-* are useful right before fork() to allow 2 processes to talk to each other. 
-* However, we will read and write from onein the same process in this silly 
-* example.
-*/
+ * Intro to pipes - Pipes are a form of interprocess communication (IPC). They
+ * are useful right before fork() to allow 2 processes to talk to each other.
+ * However, we will read and write from onein the same process in this silly
+ * example.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -15,7 +15,7 @@ int main() {
   int fd[2];
   int bytes_written, bytes_read;
   char buffer[MSG_SIZE];
-  
+
   // create pipe (opens 2 files, 1 for reading and 1 for writing).
   // Pipes are NOT bidrectional. Can only write to fd[1] and read from fd[0].
   if (pipe(fd) == -1) {

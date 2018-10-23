@@ -1,6 +1,6 @@
 /*
-* Pipes with fork(). The pipe files get cloned but there is still 1 pipe.
-*/
+ * Pipes with fork(). The pipe files get cloned but there is still 1 pipe.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,7 +14,6 @@ int main() {
   int bytes_written, bytes_read;
   char buffer[MSG_SIZE];
 
-
   // create pipe (opens 2 files, 1 for reading and 1 for writing).
   // Pipes are NOT bidrectional. Can only write to fd[1] and read from fd[0].
   if (pipe(fd) == -1) {
@@ -22,7 +21,8 @@ int main() {
     exit(EXIT_FAILURE);
   }
 
-  // fork the process into 2, the pipe files will be copied with the file descriptor table.
+  // fork the process into 2, the pipe files will be copied with the file
+  // descriptor table.
   if ((pid = fork()) < 0) {
     perror("fork failed");
     exit(EXIT_FAILURE);
@@ -43,7 +43,7 @@ int main() {
     close(fd[1]);
   } else {
     // PARENT (main process)
-    
+
     // Close write end of the pipe because we don't need it.
     close(fd[1]);
     // read message from output of pipe, store into buffer.
@@ -55,6 +55,6 @@ int main() {
     printf("Child read from the output of the pipe and got: %s\n", buffer);
     close(fd[0]);
   }
-  
+
   exit(EXIT_SUCCESS);
 }
