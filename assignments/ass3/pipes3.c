@@ -23,7 +23,7 @@ int main() {
   }
 
   if (pid == 0) {
-    // PARENT (1st Process)
+    // CHILD #1
 
     // Note, only *PARENT*  will create second pipe and fork again.
     if (pipe(fd2) == -1) {
@@ -36,7 +36,7 @@ int main() {
     }
 
     if (pid2 == 0) {
-      // PARENT (still 1st Process, 'Right' process)
+      // CHILD #2 ('Right' process)
 
       // Close ends of pipes we don't care about.
       close(fd[0]);
@@ -54,7 +54,7 @@ int main() {
       exit(EXIT_FAILURE);
 
     } else {
-      // CHILD ('Middle' Process, connects the 'Left' and 'Right')
+      // CHILD #1 ('Middle' Process, connects the 'Left' and 'Right')
 
       // Close ends of pipes we don't care about.
       close(fd[1]);
@@ -75,7 +75,7 @@ int main() {
     }
 
   } else {
-    // CHILD ('Left' Process, feeds data into 1st pipe)
+    // PARENT ('Left' Process, feeds data into 1st pipe)
 
     // Close ends of pipes we don't care about.
     // (Notice, the 2nd pipe was never opened for this process.)

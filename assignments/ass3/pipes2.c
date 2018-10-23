@@ -29,9 +29,9 @@ int main() {
   }
 
   if (pid == 0) {
-    // PARENT (main process)
+    // CHILD (2nd process)
 
-    // Close read end of the pipe *IN PARENT* because we don't need it.
+    // Close read end of the pipe because we don't need it.
     close(fd[0]);
 
     // write message into input of pipe.
@@ -42,9 +42,9 @@ int main() {
     }
     close(fd[1]);
   } else {
-    // CHILD (2nd process)
+    // PARENT (main process)
     
-    // Close write end of the pipe *IN CHILD* because we don't need it.
+    // Close write end of the pipe because we don't need it.
     close(fd[1]);
     // read message from output of pipe, store into buffer.
     bytes_read = read(fd[0], buffer, MSG_SIZE);
