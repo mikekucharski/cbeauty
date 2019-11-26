@@ -31,11 +31,9 @@ int main(int argc, char *argv[]) {
   }
 
   /*
-   * 1) START A LOOP
-   * 2) Read from input file into the buffer
-   * Don't read one byte at a time!  Try to read 256 bytes at a time.
-   * (this is a major requirement for this assignment). 3) Write, whatever you
-   * read into the buffer, into the output file
+   * 1) Start loop.
+   * 2) Read from input file into the buffer (more than 1 character at a time).
+   * 3) Write from the buffer into the output file.
    */
   expected_bytes = sizeof(buffer);
   for (;;) {

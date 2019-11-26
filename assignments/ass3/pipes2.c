@@ -22,7 +22,8 @@ int main() {
   }
 
   // fork the process into 2, the pipe files will be copied with the file
-  // descriptor table.
+  // descriptor table. Parent process gets returned the ID of the child process,
+  // child process return value is 0.
   if ((pid = fork()) < 0) {
     perror("fork failed");
     exit(EXIT_FAILURE);

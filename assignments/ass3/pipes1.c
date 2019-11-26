@@ -12,6 +12,8 @@
 char* message = "hello, world";
 
 int main() {
+  // Holds the input/output file descriptors for a call to pipe(). write to
+  // fd[1] and read from fd[0].
   int fd[2];
   int bytes_written, bytes_read;
   char buffer[MSG_SIZE];
