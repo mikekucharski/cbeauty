@@ -2,9 +2,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void first_exit_handler() { printf("FIRST Exit Handler\n"); }
+void first_exit_handler() {
+  printf("FIRST Exit Handler\n");
+}
 
-void second_exit_handler() { printf("SECOND Exit Handler\n"); }
+void second_exit_handler() {
+  printf("SECOND Exit Handler\n");
+}
 
 int main() {
   // Notice how the process sleeps for 5 seconds before anything is printed to

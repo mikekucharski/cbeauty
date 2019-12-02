@@ -41,13 +41,17 @@ the process state at the time of termination.
  * Stop : The process will stop, like with a Ctrl-Z
  * Cont : The process will continue from being stopped
 */
-void hello(int signum) { 
-  printf("Hello World! %d\n", signum); 
+void hello(int signum) {
+  printf("Signal handler for signal number: %d\n", signum);
 }
 
 int main() {
   // execute hello() when receiving signal SIGUSR1.
-  signal(SIGUSR1, hello);
+  // Failure can happen like if you try to override SIGKILL/SIGSTOP.
+  if (signal(SIGUSR1, hello) == SIG_ERR) {
+    perror("error trying to override signal handler.");
+    exit(1);
+  }
 
   // explicitly send SIGUSR1 to the current process.
   raise(SIGUSR1);
